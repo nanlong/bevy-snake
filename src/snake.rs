@@ -135,14 +135,17 @@ fn spawn_segment(mut commands: Commands, position: Position) -> Entity {
 }
 
 fn snake_movement_input(
-    mut keyboard_input: ResMut<ButtonInput<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     heads: Query<&SnakeHead>,
     mut last_input_direction: ResMut<LastInputDirection>,
 ) {
-    keyboard_input.clear();
     let head = heads.single();
 
     let dir = [
+        (KeyCode::KeyA, Direction::Left),
+        (KeyCode::KeyD, Direction::Right),
+        (KeyCode::KeyW, Direction::Up),
+        (KeyCode::KeyS, Direction::Down),
         (KeyCode::ArrowLeft, Direction::Left),
         (KeyCode::ArrowRight, Direction::Right),
         (KeyCode::ArrowUp, Direction::Up),
