@@ -28,7 +28,7 @@ impl Plugin for SnakePlugin {
             .add_systems(Update, snake_eating.after(snake_movement))
             .add_systems(Update, snake_growth.after(snake_eating))
             .add_systems(Update, snake_movement_input.before(snake_movement))
-            .add_systems(Update, snake_movement_update.after(snake_movement_input))
+            .add_systems(Update, snake_direction.after(snake_movement_input))
             .add_event::<GrowthEvent>()
             .add_event::<GameOverEvent>();
     }
@@ -158,7 +158,7 @@ fn snake_movement_input(
     *last_input_direction = LastInputDirection(Some(dir));
 }
 
-fn snake_movement_update(
+fn snake_direction(
     mut heads: Query<&mut SnakeHead>,
     last_input_direction: Res<LastInputDirection>,
 ) {
