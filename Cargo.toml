@@ -1,0 +1,15 @@
+[package]
+name = "bevy_snake"
+version = "0.1.0"
+edition = "2021"
+authors = ["Jeff"]
+
+[dependencies]
+bevy = "0.13.2"
+rand = "0.8.5"
+
+[profile.dev]
+opt-level = 1
+
+[profile.dev.package."*"]
+opt-level = 3
