@@ -5,7 +5,16 @@ pub struct WorldPlugin;
 
 impl Plugin for WorldPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Startup, spawn_camera)
+        app.insert_resource(ClearColor(Color::rgb(0.04, 0.04, 0.04)))
+            .add_plugins(DefaultPlugins.set(WindowPlugin {
+                primary_window: Some(Window {
+                    title: "Snake!".to_string(),
+                    resolution: (500., 500.).into(),
+                    ..default()
+                }),
+                ..default()
+            }))
+            .add_systems(Startup, spawn_camera)
             .add_systems(Update, (size_scaling, position_translation));
     }
 }
